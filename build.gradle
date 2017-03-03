@@ -1,0 +1,113 @@
+/*^
+  ===========================================================================
+  TwoBinManager - SDK
+  ===========================================================================
+  Copyright (C) 2017 Gianluca Costa
+  ===========================================================================
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as
+  published by the Free Software Foundation, either version 3 of the
+  License, or (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public
+  License along with this program.  If not, see
+  <http://www.gnu.org/licenses/gpl-3.0.html>.
+  ===========================================================================
+*/
+
+buildscript {
+    repositories {
+        maven {
+            url 'https://dl.bintray.com/giancosta86/Hephaestus'
+        }
+
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'info.gianlucacosta.moonlicense:moonlicense-gradle:5.0'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath 'info.gianlucacosta.aurora:aurora:8.0'
+
+        classpath 'com.github.maiflai:gradle-scalatest:0.14'
+    }
+}
+
+
+apply plugin: 'scala'
+apply plugin: 'maven'
+apply plugin: 'osgi'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.maiflai.scalatest'
+
+apply plugin: 'info.gianlucacosta.moonlicense'
+apply plugin: 'info.gianlucacosta.aurora'
+
+
+group 'info.gianlucacosta.twobinpack'
+archivesBaseName = 'twobinmanager-sdk'
+version = '3.0'
+
+
+description = 'Software Development Kit for TwoBinManager'
+
+ext.facebookPage = "https://www.facebook.com/TwoBinPack-234021307010796"
+
+
+dependencies {
+    generatedCompile 'org.scala-lang:scala-library:2.11.8'
+
+    compile 'org.scala-lang:scala-library:2.11.8'
+
+    compile 'com.typesafe.akka:akka-actor_2.11:2.4.17'
+    compile 'com.typesafe.akka:akka-remote_2.11:2.4.17'
+
+    compile 'info.gianlucacosta.twobinpack:twobinkernel:3.0'
+
+    testCompile 'org.scalatest:scalatest_2.11:2.2.6'
+    testRuntime 'org.pegdown:pegdown:1.6.0'
+}
+
+
+
+moonLicense {
+    license = gpl3
+
+    productInfo {
+        productName = 'TwoBinManager - SDK'
+        inceptionYear = 2017
+        copyrightHolder = 'Gianluca Costa'
+    }
+}
+
+
+aurora {
+    gitHubUser = 'giancosta86'
+
+    author {
+        name = 'Gianluca Costa'
+        email = 'gianluca@gianlucacosta.info'
+        url = 'http://gianlucacosta.info/'
+    }
+
+    bintray {
+        repo = 'Hephaestus'
+        licenses = ['GPL-3.0']
+        labels = [
+                'two-dimensional',
+                '2D',
+                'packing',
+                'problems',
+                'solutions',
+                'library',
+                'Scala',
+                'TwoBinManager',
+                'SDK'
+        ]
+    }
+}
